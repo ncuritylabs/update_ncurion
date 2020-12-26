@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  logmanager-logtransfer:  
+    image: "manager.ncurity.com:5001/logmanager-logtransfer:1.0.20.12.26"
+    container_name: logmanager-logtransfer
+    restart: always
+    environment:
+      - NCURION_REDIS_HOST=${NCURION_REDIS_HOST:-172.16.108.184}
+      - NCURION_SYSLOG_HOSTS=${NCURION_SYSLOG_HOSTS:-[]}
+      - NCURION_SYSLOG_PORT=${NCURION_SYSLOG_PORT:-514}
+      - NCURION_SYSLOG_PROTO=${NCURION_SYSLOG_PROTO:-udp}
+    volumes:
+      - logmanager-logtransfer:/opt/ncurity/ncurion/logmanager/logtransfer/cfg # 
+
+    command: log-to-syslog -c /opt/ncurity/ncurion/logmanager/logtransfer/cfg/redis-to-syslog.yml.yml -e 
+    # extra_hosts:
+    #   - "master.host:$NCURITY_HOSTIP"
+      # export NCURITY_HOSTIP=$(hostname -I | awk '{print $1}')
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "2"    
+
+volumes:
+  logmanager-logtransfer:
