@@ -66,5 +66,5 @@ update_logstash() {
 
 update_ncshell
 update_logtransfer_images
-update_logstash
+# update_logstash
 run_logtransfer_images
