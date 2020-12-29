@@ -4,7 +4,11 @@
 
 * [기능개선]: swf-decompression on/off
   * 센서 기능
-  * nucurion shell: config sensor engine settings applayers set swf-decompression <on/off>
+  * nucurion shell: config sensor engine settings applayers set swf-decompression { on | off }
+    * 위의 설정 후 센서는 자동으로 재시작됨
+* [기능개선]: xff mode 설정
+  * 센서 기능
+  * nucurion shell: config sensor engine settings outputs set xff { mode { extra-data | overwrite } | header <string> }
     * 위의 설정 후 센서는 자동으로 재시작됨
 
 ## update_201228.sh
